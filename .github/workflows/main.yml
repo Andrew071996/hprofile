@@ -1,11 +1,17 @@
 name: Hprofile Actions
 on: workflow_dispatch
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   Testing:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Code checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         
       - name: Maven test
         run: mvn test
@@ -20,7 +26,9 @@ jobs:
          java-version: '11'
 
       - name: Setup SonarQube
-        uses: warchant/setup-sonar-scanner@v7
+        uses: warchant/setup-sonar-scanner@v8
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
         
 
        # Run sonar-scanner
